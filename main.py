@@ -24,3 +24,14 @@ def show_transactions():
         print("\ntransactions list:")
         for row in reader:
             print(f"{row['date']} | {row['type']} | {row['amount']} | {row['note']}")
+
+
+def summary():
+    income, expense = 0, 0
+    with open(FILE_NAME, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row["type"] == "income":
+                income += float(row["amount"])
+            elif row["type"] == "expense":
+                expense += float(row["amount"])
