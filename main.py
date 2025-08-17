@@ -62,6 +62,37 @@ def search_transactions(keyword):
             print("nothing found.")
 
 
+def delete_transaction():
+    with open(FILE_NAME, "r", encoding="utf-8") as f:
+        reader = list(csv.DictReader(f))
+
+    if not reader:
+        print("no transactions found.")
+        return
+
+    print("\n List of transactions to delete:")
+    for i, row in enumerate(reader, start=1):
+        print(f"{i}. {row['date']} | {row['type']} | {row['amount']} | {row['note']}")
+
+    try:
+        choice = int(input("Enter the transaction number to delete: "))
+        if 1 <= choice <= len(reader):
+            removed = reader.pop(choice - 1)
+            with open(FILE_NAME, "w", newline="", encoding="utf-8") as f:
+                writer = csv.DictWriter(
+                    f, fieldnames=["date", "type", "amount", "note"]
+                )
+                writer.writeheader()
+                writer.writerows(reader)
+            print(
+                f"Transaction deleted: {removed['date']} | {removed['type']} | {removed['amount']} | {removed['note']}"
+            )
+        else:
+            print("Invalid number.")
+    except ValueError:
+        print("Input must be a number.")
+
+
 def menu():
     while True:
         print("\n=== Expense Management System ===")
