@@ -182,6 +182,25 @@ def report():
         print(" Invalid selection.")
 
 
+def chart():
+    income, expense = 0, 0
+    with open(FILE_NAME, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row["type"] == "income":
+                income += float(row["amount"])
+            elif row["type"] == "expense":
+                expense += float(row["amount"])
+
+    # draw chart
+    labels = ["Income", "Expense"]
+    values = [income, expense]
+    colors = ["green", "red"]
+
+    plt.bar(labels, values, color=colors)
+    plt.title("Income and expense comparison")
+    plt.ylabel("Amount of (currency)")
+    plt.show()
 
 
 def menu():
