@@ -35,3 +35,8 @@ def summary():
                 income += float(row["amount"])
             elif row["type"] == "expense":
                 expense += float(row["amount"])
+    balance = income - expense
+    print("\n Summary:")
+    print(f"Income: {income}")
+    print(f"Expense: {expense}")
+    print(f"Balance: {balance}")
