@@ -211,8 +211,13 @@ def menu():
         print("3. Show Transactions")
         print("4. Show Summary")
         print("5. Exit")
+        print("6. Search Transactions")
+        print("7. Delete Transaction")
+        print("8. Edit Transaction")
+        print("9. Advanced Report")
+        print("10. Show Chart")
 
-        choice = input("Enter your choice: ")
+        choice = input("Select an option: ")
         if choice == "1":
             amount = input("Income amount: ")
             note = input("Description: ")
@@ -228,9 +233,21 @@ def menu():
         elif choice == "5":
             print("Goodbye!")
             break
+        elif choice == "6":
+            keyword = input("Enter keyword or date to search: ")
+            search_transactions(keyword)
+        elif choice == "7":
+            delete_transaction()
+        elif choice == "8":
+            edit_transaction()
+        elif choice == "9":
+            report()
+        elif choice == "10":
+            chart()
         else:
             print("Invalid choice")
-
+            print("Please try again.")
+            continue
 
 if __name__ == "__main__":
     menu()
