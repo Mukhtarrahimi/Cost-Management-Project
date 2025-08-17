@@ -42,6 +42,26 @@ def summary():
     print(f"Balance: {balance}")
 
 
+def search_transactions(keyword):
+    with open(FILE_NAME, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        found = False
+        print(f"\n Search results for: {keyword}")
+        for row in reader:
+            if (
+                keyword in row["date"]
+                or keyword in row["type"]
+                or keyword in row["amount"]
+                or keyword in row["note"]
+            ):
+                print(
+                    f"{row['date']} | {row['type']} | {row['amount']} | {row['note']}"
+                )
+                found = True
+        if not found:
+            print("nothing found.")
+
+
 def menu():
     while True:
         print("\n=== Expense Management System ===")
