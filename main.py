@@ -16,3 +16,11 @@ def add_transaction(tx_type, amount, note):
         writer = csv.writer(f)
         writer.writerow([today, tx_type, amount, note])
     print("Transaction saved.")
+
+
+def show_transactions():
+    with open(FILE_NAME, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        print("\ntransactions list:")
+        for row in reader:
+            print(f"{row['date']} | {row['type']} | {row['amount']} | {row['note']}")
