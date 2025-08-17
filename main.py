@@ -1,6 +1,8 @@
 import csv
 import os
 from datetime import date
+import matplotlib.pyplot as plt
+
 
 FILE_NAME = "data.csv"
 
@@ -178,6 +180,8 @@ def report():
             print("No transactions found for this month.")
     else:
         print(" Invalid selection.")
+
+
 
 
 def menu():
