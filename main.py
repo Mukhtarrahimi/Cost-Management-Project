@@ -40,3 +40,13 @@ def summary():
     print(f"Income: {income}")
     print(f"Expense: {expense}")
     print(f"Balance: {balance}")
+
+
+def menu():
+    while True:
+        print("\n=== Expense Management System ===")
+        print("1. Add Income")
+        print("2. Add Expense")
+        print("3. Show Transactions")
+        print("4. Show Summary")
+        print("5. Exit")
