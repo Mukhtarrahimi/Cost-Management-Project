@@ -137,6 +137,49 @@ def edit_transaction():
         print(" Input must be a number.")
 
 
+#  Report Generation
+def report():
+    print("\nAdvanced Reporting:")
+    print("1. Only Incomes")
+    print("2. Only Expenses")
+    print("3. Transactions of a Specific Month (e.g., 2025-08)")
+    choice = input("Select an option: ")
+
+    with open(FILE_NAME, "r", encoding="utf-8") as f:
+        reader = list(csv.DictReader(f))
+
+    if not reader:
+        print(" No transactions found.")
+        return
+
+    if choice == "1":  # Only Incomes
+        print("\n List of Incomes:")
+        for row in reader:
+            if row["type"] == "income":
+                print(f"{row['date']} | {row['amount']} | {row['note']}")
+
+    elif choice == "2":  # Only Expenses
+        print("\n List of Expenses:")
+        for row in reader:
+            if row["type"] == "expense":
+                print(f"{row['date']} | {row['amount']} | {row['note']}")
+
+    elif choice == "3":  # Transactions of a Specific Month
+        month = input("Enter the month (e.g., 2025-08): ")
+        print(f"\n Transactions for {month}:")
+        found = False
+        for row in reader:
+            if row["date"].startswith(month):
+                print(
+                    f"{row['date']} | {row['type']} | {row['amount']} | {row['note']}"
+                )
+                found = True
+        if not found:
+            print("No transactions found for this month.")
+    else:
+        print(" Invalid selection.")
+
+
 def menu():
     while True:
         print("\n=== Expense Management System ===")
