@@ -60,3 +60,12 @@ def menu():
             amount = input("Expense amount: ")
             note = input("Description: ")
             add_transaction("expense", amount, note)
+        elif choice == "3":
+            show_transactions()
+        elif choice == "4":
+            summary()
+        elif choice == "5":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice")
