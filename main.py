@@ -93,6 +93,50 @@ def delete_transaction():
         print("Input must be a number.")
 
 
+def edit_transaction():
+    with open(FILE_NAME, "r", encoding="utf-8") as f:
+        reader = list(csv.DictReader(f))
+
+    if not reader:
+        print("no transactions found.")
+        return
+
+    print("\n List of transactions to edit:")
+    for i, row in enumerate(reader, start=1):
+        print(f"{i}. {row['date']} | {row['type']} | {row['amount']} | {row['note']}")
+
+    try:
+        choice = int(input("Enter the transaction number to edit: "))
+        if 1 <= choice <= len(reader):
+            tx = reader[choice - 1]
+            print("\n Enter new values (leave blank to keep current):")
+            new_type = input(f"Type ({tx['type']}): ") or tx["type"]
+            new_amount = input(f"Amount ({tx['amount']}): ") or tx["amount"]
+            new_note = input(f"Description ({tx['note']}): ") or tx["note"]
+
+            # update
+            reader[choice - 1] = {
+                "date": tx["date"],
+                "type": new_type,
+                "amount": new_amount,
+                "note": new_note,
+            }
+
+            # save again
+            with open(FILE_NAME, "w", newline="", encoding="utf-8") as f:
+                writer = csv.DictWriter(
+                    f, fieldnames=["date", "type", "amount", "note"]
+                )
+                writer.writeheader()
+                writer.writerows(reader)
+
+            print(" Transaction edited successfully.")
+        else:
+            print(" Invalid number.")
+    except ValueError:
+        print(" Input must be a number.")
+
+
 def menu():
     while True:
         print("\n=== Expense Management System ===")
