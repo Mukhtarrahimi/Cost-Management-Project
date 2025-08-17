@@ -50,3 +50,13 @@ def menu():
         print("3. Show Transactions")
         print("4. Show Summary")
         print("5. Exit")
+
+        choice = input("Enter your choice: ")
+        if choice == "1":
+            amount = input("Income amount: ")
+            note = input("Description: ")
+            add_transaction("income", amount, note)
+        elif choice == "2":
+            amount = input("Expense amount: ")
+            note = input("Description: ")
+            add_transaction("expense", amount, note)
